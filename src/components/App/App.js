@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import Navigation from '../Navigation/Navigation';
@@ -11,23 +11,48 @@ import Account from '../Account/Account';
 import Admin from '../Admin/Admin';
 
 import * as ROUTES from '../../constants/routes';
+import { withFirebase } from '../Firebase/Firebase-index';
 
-const App = () => (
-  <Router>
-    <div>
-      <Navigation />
+class App extends Component {
+  constructor(props) {
+    super(props);
 
-      <hr />
+    this.state = {
+      authUser: null
+    };
+  }
 
-      <Route exact path={ROUTES.LANDING} component={Landing} />
-      <Route path={ROUTES.SIGN_UP} component={SignUp} />
-      <Route path={ROUTES.SIGN_IN} component={SignIn} />
-      <Route path={ROUTES.PASSWORD_FORGET} component={PasswordForget} />
-      <Route path={ROUTES.HOME} component={Home} />
-      <Route path={ROUTES.ACCOUNT} component={Account} />
-      <Route path={ROUTES.ADMIN} component={Admin} />
-    </div>
-  </Router>
-);
+  componentDidMount() {
+    this.listener = this.props.firebase.auth.onAuthStateChanged(authUser => {
+      authUser
+        ? this.setState({ authUser })
+        : this.setState({ authUser: null });
+    });
+  }
 
-export default App;
+  componentWillUnmount() {
+    this.listener();
+  }
+
+  render() {
+    return (
+      <Router>
+        <div>
+          <Navigation authUser={this.state.authUser} />
+
+          <hr />
+
+          <Route exact path={ROUTES.LANDING} component={Landing} />
+          <Route path={ROUTES.SIGN_UP} component={SignUp} />
+          <Route path={ROUTES.SIGN_IN} component={SignIn} />
+          <Route path={ROUTES.PASSWORD_FORGET} component={PasswordForget} />
+          <Route path={ROUTES.HOME} component={Home} />
+          <Route path={ROUTES.ACCOUNT} component={Account} />
+          <Route path={ROUTES.ADMIN} component={Admin} />
+        </div>
+      </Router>
+    );
+  }
+}
+
+export default withFirebase(App);
