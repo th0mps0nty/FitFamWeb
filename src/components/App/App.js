@@ -12,23 +12,33 @@ import Admin from '../Admin/Admin';
 
 import * as ROUTES from '../../constants/routes';
 import { withAuthentication } from '../Session/Session';
+import StripeCheckout from 'react-stripe-checkout';
 
 const App = () => (
-  <Router>
-    <div>
-      <Navigation />
+  <div>
+    <Router>
+      <div>
+        <Navigation />
 
-      <hr />
+        <hr />
 
-      <Route exact path={ROUTES.LANDING} component={Landing} />
-      <Route path={ROUTES.SIGN_UP} component={SignUp} />
-      <Route path={ROUTES.SIGN_IN} component={SignIn} />
-      <Route path={ROUTES.PASSWORD_FORGET} component={PasswordForget} />
-      <Route path={ROUTES.HOME} component={Home} />
-      <Route path={ROUTES.ACCOUNT} component={Account} />
-      <Route path={ROUTES.ADMIN} component={Admin} />
-    </div>
-  </Router>
+        <Route exact path={ROUTES.LANDING} component={Landing} />
+        <Route path={ROUTES.SIGN_UP} component={SignUp} />
+        <Route path={ROUTES.SIGN_IN} component={SignIn} />
+        <Route path={ROUTES.PASSWORD_FORGET} component={PasswordForget} />
+        <Route path={ROUTES.HOME} component={Home} />
+        <Route path={ROUTES.ACCOUNT} component={Account} />
+        <Route path={ROUTES.ADMIN} component={Admin} />
+      </div>
+    </Router>
+    <p classname="App-intro">
+      <StripeCheckout
+        name={'FitFamWeb Test'}
+        description={'Testing'}
+        amount={1}
+      />
+    </p>
+  </div>
 );
 
 export default withAuthentication(App);
