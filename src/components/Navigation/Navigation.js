@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import { Navbar, NavbarBrand, Nav, NavItem, NavLink, Button } from 'reactstrap';
+import { Navbar, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
 import SignOutButton from '../SignOut/SignOut';
 import * as ROUTES from '../../constants/routes';
 import { AuthUserContext } from '../Session/Session';
@@ -16,25 +16,25 @@ const Navigation = () => (
 
 const NavigationAuth = () => (
   <div>
-    <Navbar color="light" light expand="md">
-      <NavbarBrand href="/">FitFam</NavbarBrand>
+    <Navbar color="dark" dark expand="md">
+      <NavbarBrand href="/">FitFam Meal Planning</NavbarBrand>
       <Nav className="ml-auto" navbar>
-        <NavItem className="navbar-text">
+        <NavItem>
           <NavLink tag={Link} to={ROUTES.LANDING}>
             Landing
           </NavLink>
         </NavItem>
-        <NavItem className="navbar-text">
+        <NavItem>
           <NavLink tag={Link} to={ROUTES.HOME}>
             Home
           </NavLink>
         </NavItem>
-        <NavItem className="navbar-text">
+        <NavItem>
           <NavLink tag={Link} to={ROUTES.ACCOUNT}>
             Account
           </NavLink>
         </NavItem>
-        <NavItem className="navbar-text">
+        <NavItem>
           <NavLink tag={Link} to={ROUTES.ADMIN}>
             Admin
           </NavLink>

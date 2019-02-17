@@ -2,7 +2,7 @@ import React from 'react';
 import SomeComponent from '../Firebase/SomeComponent';
 
 const Landing = () => (
-  <div>
+  <div className="container">
     <SomeComponent />
   </div>
 );

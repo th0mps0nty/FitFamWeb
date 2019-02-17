@@ -12,14 +12,14 @@ import Admin from '../Admin/Admin';
 
 import * as ROUTES from '../../constants/routes';
 import { withAuthentication } from '../Session/Session';
+import AppNavbar from '../Navigation/AppNavbar';
 
 const App = () => (
   <Router>
-    <div>
+    <div className="container">
       <Navigation />
-
+      <AppNavbar />
       <hr />
-
       <Route exact path={ROUTES.LANDING} component={Landing} />
       <Route path={ROUTES.SIGN_UP} component={SignUp} />
       <Route path={ROUTES.SIGN_IN} component={SignIn} />
