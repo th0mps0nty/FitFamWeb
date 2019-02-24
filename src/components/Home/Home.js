@@ -1,6 +1,7 @@
-import React from 'react';
+import React from "react";
+import { connect } from "react-redux";
 
-import { withAuthorization } from '../Session/Session';
+import { withAuthorization } from "../Session/Session";
 
 const HomePage = () => (
   <div className="container">
@@ -13,4 +14,11 @@ const HomePage = () => (
 
 const condition = authUser => !!authUser;
 
-export default withAuthorization(condition)(HomePage);
+const mapStateToProps = state => {
+  return {
+    projects: state.project.projects,
+  };
+};
+
+export default connect(mapStateToProps)(HomePage);
+// export default withAuthorization(condition)(HomePage);
